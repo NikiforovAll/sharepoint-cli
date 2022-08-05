@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<NoWarn>NU1701</NoWarn>
+	<UserSecretsId>a6bd14a4-1d3d-4cf7-af45-f1959b269891</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.35.0" />
+    <PackageReference Include="Object.Dump" Version="1.0.0" />
+    <PackageReference Include="Spectre.Console" Version="0.44.0" />
+    <PackageReference Include="system.commandline" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+</Project>
