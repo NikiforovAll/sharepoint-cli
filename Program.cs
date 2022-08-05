@@ -9,6 +9,7 @@ root
         .AddSiteDrives();
 
 root
-    .AddDrives();
+    .AddDrives()
+        .AddDriveItems();
 
 await root.InvokeAsync(args);

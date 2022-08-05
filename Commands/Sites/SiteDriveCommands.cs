@@ -1,5 +1,4 @@
-﻿using ObjectDump.Extensions;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace SharePointDemo.Commands.Sites;
 
@@ -33,6 +32,7 @@ public static class SiteDriveCommands
         var drive = await graphClient.Sites[siteId].Drives[driveId]
             .Request().GetAsync();
 
+        // .Dump doesn't work
         Console.WriteLine(JsonSerializer.Serialize(drive, options: new JsonSerializerOptions()
         {
             WriteIndented = true,
