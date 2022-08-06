@@ -8,8 +8,8 @@ root.AddGlobalOption(OutputFormatter.FormatOption);
 
 root
     .AddSites()
-        .AddSitePermissions()
-        .AddSiteDrives();
+        .AddSiteDrives()
+        .AddSitePermissions();
 
 root
     .AddDrives()

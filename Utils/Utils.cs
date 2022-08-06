@@ -27,13 +27,21 @@ public static class Utils
                             identity.Application.Id,
                             identity.ODataType);
                     }
-                    else
+                    else if (identity.SiteUser is not null)
                     {
                         table.AddRow(
                             permission.Id,
-                            identity.SiteUser?.LoginName ?? string.Empty,
-                            identity.SiteUser?.DisplayName ?? string.Empty,
-                            identity.SiteUser?.ODataType ?? string.Empty);
+                            identity.SiteUser.LoginName ?? string.Empty,
+                            identity.SiteUser.DisplayName ?? string.Empty,
+                            identity.SiteUser.ODataType ?? string.Empty);
+                    }
+                    else if (identity.User is not null)
+                    {
+                        table.AddRow(
+                            permission.Id,
+                            identity.User.DisplayName ?? string.Empty,
+                            identity.User.DisplayName ?? string.Empty,
+                            identity.User.ODataType ?? string.Empty);
                     }
                 }
             }

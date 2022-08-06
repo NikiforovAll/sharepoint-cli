@@ -46,7 +46,6 @@ public class GraphClientFactory : BinderBase<GraphServiceClient>
 
     protected override GraphServiceClient GetBoundValue(BindingContext bindingContext)
     {
-        
-        return GetClient();
+        return GetDefaultClient();
     }
 }
