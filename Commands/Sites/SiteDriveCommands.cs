@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using SharePointDemo.Utils;
+using System.Text.Json;
 
 namespace SharePointDemo.Commands.Sites;
 
@@ -18,7 +19,7 @@ public static class SiteDriveCommands
         var driveId = new Option<string>("--drive-id") { IsRequired = true };
         get.AddOption(driveId);
 
-        get.SetHandler(Get, siteId, driveId, new GraphClientFactory());
+        get.SetHandler(Get, siteId, driveId, new GraphClientFactory(), new OutputFormatter());
 
         root.AddCommand(drives);
         drives.AddCommand(list);
@@ -27,16 +28,16 @@ public static class SiteDriveCommands
         return root;
     }
 
-    private static async Task Get(string siteId, string driveId, GraphServiceClient graphClient)
+    private static async Task Get(
+        string siteId,
+        string driveId,
+        GraphServiceClient graphClient,
+        OutputFormatter formatter)
     {
         var drive = await graphClient.Sites[siteId].Drives[driveId]
             .Request().GetAsync();
 
-        // .Dump doesn't work
-        Console.WriteLine(JsonSerializer.Serialize(drive, options: new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-        }));
+        formatter.Print(drive);
     }
 
     private static async Task List(string siteId, GraphServiceClient graphClient)

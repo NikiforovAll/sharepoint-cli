@@ -1,4 +1,5 @@
 ﻿using ObjectDump.Extensions;
+using SharePointDemo.Utils;
 
 namespace SharePointDemo.Commands.Sites;
 
@@ -26,7 +27,7 @@ public static class SiteCommands
         var getSite = new Command("get");
         var siteId = new Option<string>("--site-id");
         getSite.AddOption(siteId);
-        getSite.SetHandler(Get, siteId, new GraphClientFactory());
+        getSite.SetHandler(Get, siteId, new GraphClientFactory(), new OutputFormatter());
 
         root.AddCommand(sites);
         sites.AddCommand(getSite);
@@ -35,12 +36,12 @@ public static class SiteCommands
         return sites;
     }
 
-    private static async Task Get(string siteId, GraphServiceClient graphClient)
+    private static async Task Get(string siteId, GraphServiceClient graphClient, OutputFormatter formatter)
     {
         var site = await graphClient.Sites[siteId]
             .Request().GetAsync();
 
-        site.DumpToConsole();
+        formatter.Print(site);
     }
 
     private static async Task Search(string hostName, string siteName, GraphServiceClient graphClient)

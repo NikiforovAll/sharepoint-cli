@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using SharePointDemo.Utils;
+using System.Text.Json;
 
 namespace SharePointDemo.Commands.Drives;
 
@@ -20,7 +21,7 @@ public static class DriveCommands
         var driveId = new Option<string>("--drive-id") { IsRequired = true };
         get.AddOption(driveId);
 
-        get.SetHandler(Get, driveId, new GraphClientFactory());
+        get.SetHandler(Get, driveId, new GraphClientFactory(), new OutputFormatter());
 
         var items = new Command("search-items");
         var searchTerm = new Option<string>("--term");
@@ -73,15 +74,15 @@ public static class DriveCommands
         }
     }
 
-    private static async Task Get(string driveId, GraphServiceClient graphClient)
+    private static async Task Get(
+        string driveId,
+        GraphServiceClient graphClient,
+        OutputFormatter formatter)
     {
         var drive = await graphClient.Drives[driveId]
             .Request()
             .GetAsync();
 
-        Console.WriteLine(JsonSerializer.Serialize(drive, options: new JsonSerializerOptions()
-        {
-            WriteIndented = true,
-        }));
+        formatter.Print(drive);
     }
 }

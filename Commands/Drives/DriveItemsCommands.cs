@@ -1,5 +1,5 @@
 ﻿
-using ObjectDump.Extensions;
+using SharePointDemo.Utils;
 
 namespace SharePointDemo.Commands.Drives;
 
@@ -14,7 +14,7 @@ public static class DriveItemsCommands
         var itemId = new Option<string>("--item-id") { IsRequired = true };
         get.AddOption(driveId);
         get.AddOption(itemId);
-        get.SetHandler(Get, driveId, itemId, new GraphClientFactory());
+        get.SetHandler(Get, driveId, itemId, new GraphClientFactory(), new OutputFormatter());
 
         root.AddCommand(drives);
         drives.AddCommand(get);
@@ -22,13 +22,17 @@ public static class DriveItemsCommands
         return root;
     }
 
-    private static async Task Get(string driveId, string itemId, GraphServiceClient graphClient)
+    private static async Task Get(
+        string driveId,
+        string itemId,
+        GraphServiceClient graphClient,
+        OutputFormatter formatter)
     {
         var item = await graphClient.Drives[driveId].Items[itemId]
             .Request()
             .Expand("children")
             .GetAsync();
 
-        item.DumpToConsole();
+        formatter.Print(item);
     }
 }

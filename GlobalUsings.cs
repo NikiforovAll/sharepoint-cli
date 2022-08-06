@@ -4,3 +4,7 @@ global using Microsoft.Graph;
 global using System.CommandLine;
 global using System.CommandLine.Binding;
 global using Spectre.Console;
+global using ObjectDump.Extensions;
+global using SharePointDemo.Utils;
+global using System.CommandLine.Builder;
+global using System.CommandLine.Parsing;
