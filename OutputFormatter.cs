@@ -9,9 +9,9 @@ public class OutputFormatter : BinderBase<OutputFormatter>
 
     public void Print<T>(T value)
     {
-        if (value is IEnumerable<Permission> permissions)
+        if (value is IEnumerable<Permission> permissions && Format == OutputFormat.Table)
         {
-            Print(permissions);
+            Utils.PrintTable(permissions);
             return;
         }
 
@@ -20,27 +20,11 @@ public class OutputFormatter : BinderBase<OutputFormatter>
             case OutputFormat.Object:
                 value.DumpToConsole();
                 break;
+            case OutputFormat.Tree:
+                value!.DumpTree(default);
+                break;
             default:
                 Console.WriteLine(JsonSerializer.Serialize(value, options: new JsonSerializerOptions()
-                {
-                    WriteIndented = true,
-                }));
-                break;
-        }
-    }
-
-    public void Print(IEnumerable<Permission> permissions)
-    {
-        switch (Format)
-        {
-            case OutputFormat.Table:
-                Utils.PrintTable(permissions);
-                break;
-            case OutputFormat.Tree:
-                Utils.PrintTree(permissions);
-                break;
-            default:
-                Console.WriteLine(JsonSerializer.Serialize(permissions, options: new JsonSerializerOptions()
                 {
                     WriteIndented = true,
                 }));
