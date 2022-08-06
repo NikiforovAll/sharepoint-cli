@@ -1,7 +1,4 @@
-﻿
-using SharePointDemo.Utils;
-
-namespace SharePointDemo.Commands.Drives;
+﻿namespace SharePointDemo.Commands.Drives;
 
 public static class DriveItemsCommands
 {

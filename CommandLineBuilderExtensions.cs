@@ -1,6 +1,4 @@
-﻿using System.CommandLine.Builder;
-
-namespace SharePointDemo;
+﻿namespace SharePointDemo;
 public static class CommandLineBuilderExtensions
 {
     public static CommandLineBuilder UseCustomExceptionHandler(this CommandLineBuilder builder)

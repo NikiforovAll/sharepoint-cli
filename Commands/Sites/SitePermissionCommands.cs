@@ -1,7 +1,4 @@
-﻿using ObjectDump.Extensions;
-using SharePointDemo.Utils;
-
-namespace SharePointDemo.Commands.Sites;
+﻿namespace SharePointDemo.Commands.Sites;
 
 public static class SitePermissionCommands
 {

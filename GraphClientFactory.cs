@@ -1,6 +1,4 @@
-﻿using SharePointDemo.Utils;
-
-namespace SharePointDemo;
+﻿namespace SharePointDemo;
 public class GraphClientFactory : BinderBase<GraphServiceClient>
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
